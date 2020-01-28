@@ -1,10 +1,8 @@
 <?php
+date_default_timezone_set('Europe/Paris');
 require_once('functions/debug.php');
 require_once ('functions/autoloader.php');
 spl_autoload_register('classAutoLoader');
-
-
-
 
 
 
@@ -46,4 +44,6 @@ $chat = new Mammiferes();
 debug($chat);*/
 
 
+$formulaire = new Form('index.php','frmContact');
+echo $formulaire->displayForm();
 
