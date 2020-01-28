@@ -3,12 +3,23 @@
 
 class Voiture
 {
-    public $_marque;
+
+    private $_marque;
     public $_modele;
     public $_couleur;
     public $_dimensions = [0,0,0];
     public $_masse;
     public $_vitesse = 0;
+
+    public function getMarque()
+    {
+    return $this->_marque;
+    }
+
+    public function setMarque($marque) : void
+    {
+    $this->_marque = $marque;
+    }
 
     public function __construct(string $marque, string $modele,string $couleur, array $dimensions, int $masse,int $vitesse)
     {
@@ -20,8 +31,8 @@ class Voiture
         $this->_vitesse = $vitesse;
     }
 
-    public function afficherMessage()
+    public function CalculerEnergieCinetique() : float
     {
-        echo "Je suis Michel";
+       return 0.5 * $this->_masse * $this->_vitesse ** 2;
     }
 }
