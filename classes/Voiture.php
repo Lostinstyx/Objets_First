@@ -1,15 +1,8 @@
 <?php
 
 
-class Voiture
+class Voiture extends Vehicule
 {
-
-    private $_marque;
-    public $_modele;
-    public $_couleur;
-    public $_dimensions = [0,0,0];
-    public $_masse;
-    public $_vitesse = 0;
 
     public function getMarque()
     {
@@ -35,4 +28,5 @@ class Voiture
     {
        return 0.5 * $this->_masse * $this->_vitesse ** 2;
     }
+
 }
