@@ -46,4 +46,5 @@ debug($chat);*/
 
 $formulaire = new Form('index.php','frmContact');
 echo $formulaire->displayForm();
-
+echo $formulaire->labelForm();
+echo $formulaire->inputForm();
