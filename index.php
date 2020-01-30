@@ -45,6 +45,9 @@ debug($chat);*/
 
 
 $formulaire = new Form('index.php','frmContact');
+echo $formulaire->beginHtml('coucou');
 echo $formulaire->displayForm();
-echo $formulaire->labelForm();
-echo $formulaire->inputForm();
+echo $formulaire->endHtml();
+
+
+

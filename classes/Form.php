@@ -4,17 +4,6 @@
 class Form
 {
     private  $_method = "post";
-    private $_label = "";
-    private $_input = "";
-    private $_name = "";
-    private $_placeholder = "";
-    private $_type = "";
-    private $_for = "";
-    private $_class = "";
-    private $_id = "";
-    private $_value = "";
-    private $_row = "";
-    private $_cols = "";
     private $_url = "";
     private $_upLoadFile = false;
     private $_iniFile;
@@ -23,9 +12,25 @@ class Form
     public function __construct(string $action, string $file)
     {
         $this->_url = $action;
-        $this->_iniFile = parse_ini_file("./conf/$file.ini");
+        $this->_iniFile = parse_ini_file("./conf/$file.ini",true);
     }
 
+    public function wesh() {
+        echo "<pre>";
+        var_dump($this->_iniFile);
+        echo "</pre>";
+    }
+    public function beginHtml($titre) :string
+    {
+        $html =  '<!DOCTYPE html>';
+        $html .= '<head>';
+        $html .= '<meta charset="utf-8" />';
+        $html .= '<title>'.$titre.'</title>';
+        $html .= '<link rel="stylesheet" href="./assets/css/style.css" />';
+        $html .= '</head>';
+        $html .= '<body>';
+        return $html;
+    }
     public function displayForm() : string
     {
         $html = '<form ';
@@ -36,37 +41,42 @@ class Form
         }
         $html .= '>';
 
+        foreach ($this->_iniFile as $key => $value) {
+            $typeBalise = explode(":", $key);
+
+            if ($typeBalise[0] === "input") {
+                if (isset($this->_iniFile[$key]['labelContent'])) {
+                    $html .= '<div>';
+                    $html .= '<label for="' . $typeBalise[1] . '">' . ucfirst($typeBalise[1]) . '</label>';
+                }
+
+                if ($this->_iniFile[$key]['type'] === "submit" || $this->_iniFile[$key]['type'] === "reset") {
+                    $html .= '<input type="' . $this->_iniFile[$key]['type'] . '" ' .
+                             'value="' .$this->_iniFile[$key]['value'] . '" />';
+
+                }
+
+
+                else {
+                    $html .= '<input type="' . $this->_iniFile[$key]['type'] . '" ' . 'id="' . $typeBalise[1] . '"' .
+                        'name="' . $typeBalise[1] . '"' . 'placeholder="Veuillez saisir votre ' . $typeBalise[1] . '"' . ' />';
+                    $html .= '</div>';
+                }
+            }
+         }
+
+
+        $html .= '</form>';
         return $html;
     }
 
-    public function labelForm() : string
+    public function endHtml() :string
     {
-        $html = '<label ';
-        $html .= 'for="'.$this->_for.'" ';
-        $html .= 'class="'.$this->_class.'" ';
-        $html .= 'id="'.$this->_id.'" ';
-        $html .= '>'.$this->_label.'</label>';
+        $html = '</body>';
+        $html .= '</html>';
 
         return $html;
     }
-
-    public function inputForm() : string
-    {
-        $html = '<input ';
-        $html .= 'type="'.$this->_type.'" ';
-        $html .= 'name="'.$this->_name.'" ';
-        $html .= 'placeholder="'.$this->_placeholder.'" ';
-        $html .= 'value="'.$this->_value.'" ';
-        $html .= 'class="'.$this->_class.'" ';
-        $html .= 'id="'.$this->_id.'" ';
-        $html .= 'row="'.$this->_row.'" ';
-        $html .= 'cals="'.$this->_cols.'" ';
-        $html .= '>'.$this->_input.'</input>';
-
-
-        return $html;
-    }
-    
 }
 
 
