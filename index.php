@@ -43,6 +43,8 @@ echo $toto->getNombrePortes().'<br/>';
 $chat = new Mammiferes();
 debug($chat);*/
 
+Demo::afficherMessage('Coucou');
+Log::logWrite("J'aime manger beaucoup !");
 
 $formulaire = new Form('index.php','frmContact');
 echo $formulaire->beginHtml('coucou');

@@ -20,6 +20,7 @@ class Form
         var_dump($this->_iniFile);
         echo "</pre>";
     }
+
     public function beginHtml($titre) :string
     {
         $html =  '<!DOCTYPE html>';
@@ -31,6 +32,7 @@ class Form
         $html .= '<body>';
         return $html;
     }
+
     public function displayForm() : string
     {
         $html = '<form ';
@@ -55,7 +57,6 @@ class Form
                              'value="' .$this->_iniFile[$key]['value'] . '" />';
 
                 }
-
 
                 else {
                     $html .= '<input type="' . $this->_iniFile[$key]['type'] . '" ' . 'id="' . $typeBalise[1] . '"' .
